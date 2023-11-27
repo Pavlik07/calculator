@@ -3,8 +3,12 @@ import React from 'react'
 import { useState } from 'react'
 import * as math from 'mathjs'
 import './globals.css'
+import Button from './Button'
+import TopInput from './TopInput'
+import OperationsWindow from './OperationsWindow'
+import Result from './Result'
 
-function App() {
+function App(props) {
   const [inputNum, setInputNum] = useState('');
   const [result, setResult] = useState('');
   const [userWindow, setUserWindow] = useState('');
@@ -69,30 +73,16 @@ function App() {
     setResult('');
     setUserWindow('');
   }
+  
 
   return (
     <div className='theApp'>
-      <div className='topInput'><input className='insideInput' type='number' value={inputNum} onChange={handleInputChange}></input></div>
-      <div className='allButtons'>
-        <button onClick={() => handleNumberClick(1)}>1</button>
-        <button onClick={() => handleNumberClick(2)}>2</button>
-        <button onClick={() => handleNumberClick(3)}>3</button>
-        <button onClick={handlePlusClick}>+</button>
-        <button onClick={() => handleNumberClick(4)}>4</button>
-        <button onClick={() => handleNumberClick(5)}>5</button>
-        <button onClick={() => handleNumberClick(6)}>6</button>
-        <button onClick={handleMinusClick}>-</button>
-        <button onClick={() => handleNumberClick(7)}>7</button>
-        <button onClick={() => handleNumberClick(8)}>8</button>
-        <button onClick={() => handleNumberClick(9)}>9</button>
-        <button onClick={handleMultiplyClick}>*</button>
-        <button onClick={handleDeleteClick}>AC</button>
-        <button onClick={() => handleNumberClick(0)}>0</button>
-        <button onClick={handleEqualsClick}>=</button>
-        <button onClick={handleDevideClick}>/</button>
-      </div>
-      <div className='userWindow'>{`Operations: ${userWindow}`}</div>
-      <p className='result'>{`Result: ${result}`}</p>
+      <TopInput inputNum={inputNum} handleInputChange={handleInputChange}/>
+      <Button handleNumberClick={handleNumberClick} handlePlusClick={handlePlusClick} handleMinusClick={handleMinusClick} 
+        handleMultiplyClick={handleMultiplyClick} handleDeleteClick={handleDeleteClick} handleEqualsClick={handleEqualsClick} handleDevideClick={handleDevideClick}
+      />
+      <OperationsWindow userWindow={userWindow} />
+      <Result result={result}/>
     </div>
   )
 }
